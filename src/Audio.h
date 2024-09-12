@@ -22,6 +22,7 @@
 #include <FS.h>
 #include <FFat.h>
 #include <atomic>
+#include <functional>
 
 #if ESP_IDF_VERSION_MAJOR == 5
 #include <driver/i2s_std.h>
@@ -176,6 +177,58 @@ public:
     int getCodec() {return m_codec;}
     const char *getCodecname() {return codecname[m_codec];}
     void unicode2utf8(char* buff, uint32_t len);
+
+    void setAudioInfoCallback(std::function<void(std::string &info)> callback) { this->audioInfoCallback = callback }                               // audio_info
+    void setID3DataCallback(std::function<void(std::string &info)> callback) { this->id3DataCallback = callback }                                   // audio_id3data
+    void setID3ImageCallback(std::function<void(File& file, const size_t pos, const size_t size)> callback) { this->id3ImageCallback = callback }   // audio_id3image
+    void setOGGImageCallback(std::function<void(File& file, std::vector<uint32_t> v)> callback) { this->oggImageCallback = callback }               // audio_oggimage
+    void setID3LyricsCallback(std::function<void(File& file, const size_t pos, const size_t size)> callback) { this->id3LyricsCallback = callback } // audio_id3lyrics
+    void setMP3EOFCallback(std::function<void(std::string &info)> callback) { this->mp3EOFCallback = callback }                                     // audio_eof_mp3
+    void setStreamTitleCallback(std::function<void(std::string &info)> callback) { this->streamTitleCallback = callback }                           // audio_showstreamtitle
+    void setStationNameCallback(std::function<void(std::string &info)> callback) { this->stationNameCallback = callback }                           // audio_showstation
+    void setBitrateChangeCallback(std::function<void(std::string &info)> callback) { this->bitrateChangeCallback = callback }                       // audio_bitrate
+    void setCommercialInfoCallback(std::function<void(std::string &info)> callback) { this->commercialInfoCallback = callback }                     // audio_commercial
+    void setICYUrlCallback(std::function<void(std::string &info)> callback) { this->icyUrlCallback = callback }                                     // audio_icyurl
+    void setICYLogoCallback(std::function<void(std::string &info)> callback) { this->icyLogoCallback = callback }                                   // audio_icylogo
+    void setICYDescriptionCallback(std::function<void(std::string &info)> callback) { this->icyDescriptionCallback = callback }                     // audio_icydescription
+    void setLastHostCallback(std::function<void(std::string &info)> callback) { this->lastHostCallback = callback }                                 // audio_lasthost
+    void setSpeechEOFCallback(std::function<void(std::string &info)> callback) { this->speechEOFCallback = callback }                               // audio_eof_speech
+    void setStreamEOFCallback(std::function<void(std::string &info)> callback) { this->streamEOFCallback = callback }                               // audio_eof_stream
+
+private:
+    std::function<void(std::string &info)> audioInfoCallback;
+    std::function<void(std::string &info)> id3DataCallback;
+    std::function<void(File& file, const size_t pos, const size_t size)> id3ImageCallback;
+    std::function<void(File& file, std::vector<uint32_t> v)> oggImageCallback;
+    std::function<void(File& file, const size_t pos, const size_t size)> id3LyricsCallback;
+    std::function<void(std::string &info)> mp3EOFCallback;
+    std::function<void(std::string &info)> streamTitleCallback;
+    std::function<void(std::string &info)> stationNameCallback;
+    std::function<void(std::string &info)> bitrateChangeCallback;
+    std::function<void(std::string &info)> commercialInfoCallback;
+    std::function<void(std::string &info)> icyUrlCallback;
+    std::function<void(std::string &info)> icyLogoCallback;
+    std::function<void(std::string &info)> icyDescriptionCallback;
+    std::function<void(std::string &info)> lastHostCallback;
+    std::function<void(std::string &info)> speechEOFCallback;
+    std::function<void(std::string &info)> streamEOFCallback;
+
+    void call_audio_info(const char* info);
+    void call_audio_id3data(const char* info);
+    void call_audio_id3image(File& file, const size_t pos, const size_t size);
+    void call_audio_oggimage(File& file, std::vector<uint32_t> v);
+    void call_audio_id3lyrics(File& file, const size_t pos, const size_t size);
+    void call_audio_eof_mp3(const char* info);
+    void call_audio_showstreamtitle(const char* info);
+    void call_audio_showstation(const char* info);
+    void call_audio_bitrate(const char* info);
+    void call_audio_commercial(const char* info);
+    void call_audio_icyurl(const char* info);
+    void call_audio_icylogo(const char* info);
+    void call_audio_icydescription(const char* info);
+    void call_audio_lasthost(const char* info);
+    void call_audio_eof_speech(const char* info);
+    void call_audio_eof_stream(const char* info);
 
 private:
 
