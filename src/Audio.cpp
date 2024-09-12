@@ -6347,141 +6347,80 @@ void Audio::performAudioTask() {
 
 void Audio::call_audio_info(const char* info) {
     if (audio_info) audio_info(info);
-
-    if(this->audioInfoCallback) {
-        std::string s(info);
-        this->audioInfoCallback(s);
-    }
+    if(this->audioInfoCallback) this->audioInfoCallback(info);
 }
 
 void Audio::call_audio_id3data(const char* info) {
     if (audio_id3data) audio_id3data(info);
-
-    if (this->id3DataCallback) {
-        std::string s(info);
-        this->id3DataCallback(s);
-    }
+    if (this->id3DataCallback) this->id3DataCallback(info);
 }
 
 void Audio::call_audio_id3image(File& file, const size_t pos, const size_t size) {
     if (audio_id3image) audio_id3image(file, pos, size);
-
-    if (this->id3ImageCallback) {
-        this->id3ImageCallback(file, pos, size);
-    }
+    if (this->id3ImageCallback) this->id3ImageCallback(file, pos, size);
 }
 
 void Audio::call_audio_oggimage(File& file, std::vector<uint32_t> v) {
     if (audio_oggimage) audio_oggimage(file, v);
-
-    if (this->oggImageCallback) {
-        this->oggImageCallback(file, v);
-    }
+    if (this->oggImageCallback) this->oggImageCallback(file, v);
 }
 
 void Audio::call_audio_id3lyrics(File& file, const size_t pos, const size_t size) {
     if (audio_id3lyrics) audio_id3lyrics(file, pos, size);
-
-    if (this->id3LyricsCallback) {
-        this->id3LyricsCallback(file, pos, size);
-    }
+    if (this->id3LyricsCallback) this->id3LyricsCallback(file, pos, size);
 }
 
 void Audio::call_audio_eof_mp3(const char* info) {
     if (audio_eof_mp3) audio_eof_mp3(info)
-
-    if (this->mp3EOFCallback) {
-        std::string s(info);
-        this->mp3EOFCallback(s);
-    }
+    if (this->mp3EOFCallback) this->mp3EOFCallback(info);
 }
 
 void Audio::call_audio_showstreamtitle(const char* info) {
     if (audio_showstreamtitle) audio_showstreamtitle(info);
-
-    if (this->streamTitleCallback) {
-        std::string s(info);
-        this->streamTitleCallback(s);
-    }
+    if (this->streamTitleCallback) this->streamTitleCallback(info);
 }
 
 void Audio::call_audio_showstation(const char* info) {
     if (audio_showstation) audio_showstation(info);
-
-    if (this->stationNameCallback) {
-        std::string s(info);
-        this->stationNameCallback(s);
-    }
+    if (this->stationNameCallback) this->stationNameCallback(info);
 }
 
 void Audio::call_audio_bitrate(const char* info) {
     if (audio_bitrate) audio_bitrate(info);
-
-    if (this->bitrateChangeCallback) {
-        std::string s(info);
-        this->bitrateChangeCallback(s);
-    }
+    if (this->bitrateChangeCallback) this->bitrateChangeCallback(info);
 }
 
 void Audio::call_audio_commercial(const char* info) {
     if (audio_commercial) audio_commercial(info);
-
-    if (this->commercialInfoCallback) {
-        std::string s(info);
-        this->commercialInfoCallback(s);
-    }
+    if (this->commercialInfoCallback) this->commercialInfoCallback(info);
 }
 
 void Audio::call_audio_icyurl(const char* info) {
     if (audio_icyurl) audio_icyurl(info);
-
-    if (this->icyUrlCallback) {
-        std::string s(info);
-        this->icyUrlCallback(s);
-    }
+    if (this->icyUrlCallback) this->icyUrlCallback(info);
 }
 
 void Audio::call_audio_icylogo(const char* info) {
     if (audio_icylogo) audio_icylogo(info);
-
-    if (this->icyLogoCallback) {
-        std::string s(info);
-        this->icyLogoCallback(s);
-    }
+    if (this->icyLogoCallback) this->icyLogoCallback(info);
 }
 
 void Audio::call_audio_icydescription(const char* info) {
     if (audio_icydescription) audio_icydescription(info);
-
-    if (this->icyDescriptionCallback) {
-        std::string s(info);
-        this->icyDescriptionCallback(s);
-    }
+    if (this->icyDescriptionCallback) this->icyDescriptionCallback(info);
 }
 
 void Audio::call_audio_lasthost(const char* info) {
     if (audio_lasthost) audio_lasthost(info);
-
-    if (this->lastHostCallback) {
-        std::string s(info);
-        this->lastHostCallback(s);
-    }
+    if (this->lastHostCallback) this->lastHostCallback(info);
 }
 
 void Audio::call_audio_eof_speech(const char* info) {
     if (audio_eof_speech) audio_eof_speech(info);
-
-    if (this->speechEOFCallback) {
-        std::string s(info);
-        this->speechEOFCallback(s);
-    }
+    if (this->speechEOFCallback) this->speechEOFCallback(info);
 }
 
 void Audio::call_audio_eof_stream(const char* info) {
     if (audio_eof_stream) audio_eof_stream(info);
-
-    if (this->streamEOFCallback) {
-        std::string s(info);
-        this->streamEOFCallback(s);
-    }
+    if (this->streamEOFCallback) this->streamEOFCallback(info);
 }
